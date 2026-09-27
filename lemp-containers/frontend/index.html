@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Containerized LEMP Example</title>
+</head>
+<body>
+<h1>Frontend (Nginx)</h1>
+<div id="msg">Loading...</div>
+<script>
+fetch('/api/status')
+.then(r => r.json())
+.then(d => { document.getElementById('msg').innerText =
+d.message; })
+.catch(e => { document.getElementById('msg').innerText = 'API
+error: ' + e; });
+</script>
+
+<h2>Week 4</h2>
+<h2>OC Pods</h2>
+<h3>Below, you can see the 3 main pods generated for the webpadge. After deleting one backend pod, a new pod is generated after a few seconds. I use the curl command to visit the webpage on cli and i can watch the visits increase as I continued copying the command. Deleting the backend pod could erase the sites data such as visits.</h3>
+
+<img src="https://a3s.fi/swift/v1/Containered-app/2026-09-27_08-07-58.png">
+
+
+
+<h3>As you can see this does not occur and visited data has not been erased. This occurs because db-deployment.yaml declares a Persistant Storage under the name mysql-data.</h3>
+
+<img src="https://a3s.fi/swift/v1/Containered-app/pers.png">
+
+
+
+</body>
+</html>
