@@ -1,18 +1,50 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
-  Explore-GitHub-Actions:
+  build-push-deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
-        uses: actions/checkout@v6
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build backend image
+        run: docker build -f backend/Dockerfile -t ifeanyi9/backend:latest .
+
+      - name: Build frontend image
+        run: docker build -f frontend/Dockerfile -t ifeanyi9/frontend:latest .
+
+      - name: Push images to Docker Hub
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          docker push ifeanyi9/backend:latest
+          docker push ifeanyi9/frontend:latest
+
+      - name: Install OpenShift CLI
+        uses: redhat-actions/oc-installer@v1
+
+      - name: Log in to OpenShift
+        run: oc login --server="${{ secrets.OPENSHIFT_SERVER }}" --token="${{ secrets.OPENSHIFT_TOKEN }}"
+
+      - name: Select OpenShift project
+        run: oc project ${{ secrets.OPENSHIFT_PROJECT }}
+
+
+      - name: Update OpenShift deployments
+        run: |
+          oc set image deployment/frontend frontend=ifeanyi9/frontend:latest
+          oc set image deployment/backend backend=ifeanyi9/backend:latest
+          oc rollout restart deployment/frontend
+          oc rollout restart deployment/backend
+          oc rollout status deployment/frontend
+          oc rollout status deployment/backend
