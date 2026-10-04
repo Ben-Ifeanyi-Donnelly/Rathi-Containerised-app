@@ -93,16 +93,65 @@ d.message; })
   
   </p>
 
+<h2>Weekly 4 Definitions<br> </h2>
+<p><br><b>Explain the difference between Continuous Integration, Continuous Delivery and Continuous Deployment.</p>
+
+  <p>
+    <br>Continuous Integration is occurs when developers who are in a team, and are working on the same repository commit their work. 
+    Multiple git pushes by multiple people can cause issues in integrating the project and can will often cause 
+    different branches which will need to be later merged. This can lead to many bugs if there are errors in the codes and otherwise.  
+  Continuous integration combats this issue by running a build test on the individual pushes, therefore testing the program runs to avoidable issues 
+  down the road. It includes unit testing, and security checks. Continuous delivery occurs after continuous integration. 
+  If and when a build test passes and runs completely, the project is copied to a separate environment called a staging area. Here, 
+  the project is checked in its own environment in the case of a bug existing that is hidden on the user's local computer. Here, 
+  a user selects to review and release the project changes. Continuos Deployment extends Delivery. It occurs when after the project 
+  has passed all its tests, it is immediately deployed. It occurs in fast paced projects where speed is essential and not usually used by most orgainsations.
+
+<br>Sources: GeeksforGeeks, 2011, https://www.geeksforgeeks.org/devops/what-is-ci-cd/<br>
+
+  </p>
+
+<p><br><b>What is alert fatigue, and how would you design a small set of alerts for a student project that avoids it?</p>
+
+<p>Alert fatigue is is occurs to software developers when they experience a very demanding amount of low priority alerts, 
+  which is a security risk as when a serious alert is occurring, it may be put under low priority and thoroughly noticed far too late causing 
+  a security breach. It is extremely common in cybersecurity experts, especially non senior members in the field. It is often caused by repetitive 
+  tasks which can decrease a users alertness to serious  issues, It is seen in other sectors of repetitive exhaustive employment such as in the medical 
+  field to doctors and nurses. A way to reduce alert fatigue would be to have a scheduled time of the day for users to go review some of the ignored alerts and 
+  to determine its priority. Even if the probability is low its a high risk alert, its a good repetitive chore to keep the thought of 'alert fatigue' in the back of their minds.
+
+<br>Sources: https: T. Krantz, A. Jonker, 2011, IBM, //www.ibm.com/think/topics/alert-fatigue<br>
+
+</p>
 
 
+<p><br><b>Explain the difference between a liveness probe and a readiness probe in Kubernetes/Rahti. What happens when each one fails?</p>
 
+  <p>The Liveness Probe and the Readiness Probe are both health checkers created by Kubernetes that ask different questions to your application.
+     When you create a pod and leave it for a while, it can become stale and deactivate. A liveness checker wakes it up in way. It can be added to a .yaml file for example, 
+     to send reminder checks to the pod to keep it awake and active. The Readiness Probe is used to ask the pods if they are ready to receive traffic. 
+     The reason for this is if an application, by the way it is setup, could need to process a large amount of information after it is deployed, 
+     a readiness probe can be used to wait till the application is ready to receive traffic, and the application will send a 'ready to receive' 
+     message to the readiness probe. The readiness probe will then acknowledge this and unblock the traffic.
 
+<br>Sources: Kubernetes, https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/<br>
+</p>
 
+<p><br><b>Why should secrets (registry tokens, cluster login tokens) never be hard-coded into a CI/CD pipeline file? How does GitHub Actions handle this instead?</p>
 
+  <p>CI/CD Pipelines are constant vectors high value areas of attack and as such, should never store passwords 
+    or tokens in the program or code. It's also important practice to know early as git history stores files even
+     after deletion so even after a user realises their mistake, changing the password or token is often mandatory, 
+     unless it is a private repository shared by none, but that also has security risks if your git account is exploited. 
+     There has been instances where attackers have been able to maliciously pull files from misconfigured repositories and 
+     having access to this these secrets can be fatal for large projects with allot of money invested into them. It is also 
+     important to create a time of life for your tokens or other secrets, to reduce the window that a secret can be compromised by 
+     attackers. An old token that has been passed and users know about is a security risk that can be exploited in social engineering 
+     or past employees who have a grudge.
+<br>Sources: T.Guo, 2025, https://blog.gitguardian.com/handle-secrets-in-ci-cd-pipelines/<br>
+</p>
+ 
 
-
-
-<h2>Weekly 4 Definitions</h2>
 
 </body>
 </html>
