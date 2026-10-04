@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: vikke82/lemp-backend:1.0.2
+          image: ifeanyi9/backend:latest
           ports:
             - containerPort: 8000
           livenessProbe:

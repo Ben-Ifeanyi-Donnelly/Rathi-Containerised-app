@@ -48,3 +48,6 @@ jobs:
           oc rollout restart deployment/backend
           oc rollout status deployment/frontend
           oc rollout status deployment/backend
+
+
+# test
