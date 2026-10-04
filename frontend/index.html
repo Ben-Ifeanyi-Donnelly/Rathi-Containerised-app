@@ -27,8 +27,7 @@ fetch('/api/status')
 .then(r => r.json())
 .then(d => { document.getElementById('msg').innerText =
 d.message; })
-.catch(e => { document.getElementById('msg').innerText = 'API
-error: ' + e; });
+.catch(e => { document.getElementById('msg').innerText = 'API error: ' + e; })
 </script>
 
 

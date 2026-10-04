@@ -1,15 +1,56 @@
 from flask import Flask, jsonify, request
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import os
+import json
+import logging
 import mysql.connector
 import requests
+import time
+
 app = Flask(__name__)
+limiter = Limiter(key_func=get_remote_address, app=app)
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
 DB_HOST = os.getenv('DB_HOST', 'db')
 DB_USER = os.getenv('DB_USER', 'ifeanyi9')
 DB_PASSWORD = os.environ['DB_PASSWORD']
 DB_NAME = os.getenv('DB_NAME', 'appdb')
+
+#timer
+@app.before_request
+def start_request_timer():
+    request.request_started_at = time.perf_counter()
+
+
+@app.after_request
+def log_request(response):
+    elapsed_ms = (time.perf_counter() - request.request_started_at) * 1000
+    logger.info(json.dumps({
+        'event': 'http_request',
+        'method': request.method,
+        'path': request.path,
+        'status': response.status_code,
+        'duration_ms': round(elapsed_ms, 2),
+    }))
+    return response
+
+
 @app.get('/api/health')
 def health():
     return {'status': 'ok'}
+
+
+@app.get('/api/status')
+def status():
+    return {'message': 'Backend API is running'}
+
+
+@app.get('/api/ready')
+def ready():
+    return {'status': 'ready'}
+
 
 FINNA = "https://api.finna.fi/api/v1/search"
 CACHE, TTL = {}, 300
