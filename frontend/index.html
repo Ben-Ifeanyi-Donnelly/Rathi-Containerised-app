@@ -19,7 +19,6 @@
 </head>
 
 <nav>
-  <a href="/">Home</a>
   <a href="/week5.html">week5</a>
   <a href="/index.html">week6</a>
 </nav>
@@ -69,6 +68,26 @@ d.message; })
       }
     });
   </script>
+
+  <p>I made a yaml file in my .github/workflow. I used it to automate the deployment we have been doing for the last few assaignments.
+    I used used variables of secrets that I will shotrtly explain below. The yaml file replaces docker build, docker push. It also uses the oc login and oc commands set the new image. When I push a new commit, the yaml reads it and uses the main.yaml file to structure the deployment. It takes the steps in order and signs me into Openshift and Docker with my tokens.
+    >
+    <img src="https://a3s.fi/swift/v1/week6/workflow-yaml.png">
+    <br>I made a secrets in for my git reposoitory and used it to store my docker username, docker token, Openshift server, token and project name.
+    I did this by downloading an app called Github Cli. Below is a screenshot of the application download.
+    <img src="https://a3s.fi/swift/v1/week6/download.png">
+    <br>I signed into github actions and attempted to build-push-deploy the project. I originally got an error the first time I did it. 
+    <img src="https://a3s.fi/swift/v1/week6/fail.png">
+    I realised eventually this was because when I had generated the token, I had given it only read permissions to my reposoitory. I needed to give it read/write priviliges, so I went back to DockerHub and made the right one.
+     <img src="https://a3s.fi/swift/v1/week6/mistakesshow.png">
+     I then deployed it again in github actions and it had worked.
+      <img src="https://a3s.fi/swift/v1/week6/complete.png"><br>
+
+      <br>I made a liveliness probe in /api/health in my app.py in Backed. Below is the results from a liveliness probe.
+      <img src="https://a3s.fi/swift/v1/week6/liveliness.png"> 
+  
+  
+  </p>
 
 
 
