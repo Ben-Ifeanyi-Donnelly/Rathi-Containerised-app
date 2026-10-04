@@ -15,6 +15,7 @@ spec:
       containers:
         - name: backend
           image: ifeanyi9/backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           livenessProbe:
