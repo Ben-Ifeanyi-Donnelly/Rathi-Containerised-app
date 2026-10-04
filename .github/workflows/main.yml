@@ -20,13 +20,21 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build backend image
-        run: docker build -f backend/Dockerfile -t ifeanyi9/backend:latest .
+        run: |
+          docker build -f backend/Dockerfile \
+            -t ifeanyi9/backend:${{ github.sha }} \
+            -t ifeanyi9/backend:latest .
 
       - name: Build frontend image
-        run: docker build -f frontend/Dockerfile -t ifeanyi9/frontend:latest .
+        run: |
+          docker build -f frontend/Dockerfile \
+            -t ifeanyi9/frontend:${{ github.sha }} \
+            -t ifeanyi9/frontend:latest .
 
       - name: Push images to Docker Hub
         run: |
+          docker push ifeanyi9/backend:${{ github.sha }}
+          docker push ifeanyi9/frontend:${{ github.sha }}
           docker push ifeanyi9/backend:latest
           docker push ifeanyi9/frontend:latest
 
@@ -42,10 +50,8 @@ jobs:
 
       - name: Update OpenShift deployments
         run: |
-          oc set image deployment/frontend frontend=ifeanyi9/frontend:latest
-          oc set image deployment/backend backend=ifeanyi9/backend:latest
-          oc rollout restart deployment/frontend
-          oc rollout restart deployment/backend
+          oc set image deployment/frontend frontend=ifeanyi9/frontend:${{ github.sha }}
+          oc set image deployment/backend backend=ifeanyi9/backend:${{ github.sha }}
           oc rollout status deployment/frontend
           oc rollout status deployment/backend
 
