@@ -88,7 +88,7 @@ def search():
 
     try:
         r = requests.get(
-            FIANNA,
+            FINNA,
             params={"lookfor": q, "type": "AllFields", "limit": 10,
                     "field[]": ["id", "title"]},
             headers={"User-Agent": "my-app/1.0"},
