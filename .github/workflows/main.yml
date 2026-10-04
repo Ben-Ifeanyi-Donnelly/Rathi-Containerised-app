@@ -47,8 +47,12 @@ jobs:
       - name: Select OpenShift project
         run: oc project ${{ secrets.OPENSHIFT_PROJECT }}
 
+      - name: Apply deployment manifests
+        run: |
+          oc apply -f yaml/frontend-deployment.yaml
+          oc apply -f yaml/backend-deployment.yaml
 
-      - name: Update OpenShift deployments
+      - name: Update deployments to this build
         run: |
           oc set image deployment/frontend frontend=ifeanyi9/frontend:${{ github.sha }}
           oc set image deployment/backend backend=ifeanyi9/backend:${{ github.sha }}
