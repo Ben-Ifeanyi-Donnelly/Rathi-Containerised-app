@@ -95,7 +95,7 @@ d.message; })
 <div class="q5">
 
 
-<h3><b>What is a Web Application Firewall (WAF) and what kinds of attacks does it defend against? Where would you place one in the three-container architecture you built in Week 4 (Route → frontend → backend → db)?</h3>
+<h3><b>What is a Web Application Firewall (WAF), and what kinds of attacks does it defend against? Where would you place one in the three-container architecture you built in Week 4 (Route → frontend → backend → db)?</h3>
 
 <p> A Web Application Firewall is a firewall configured to deal with malicious HTTPS traffic that attack web applications. It monitors the network for incoming attacks and can alert your system from DDOS Attacks, SQL injections, zero day attacks and cross site scripting attacks. It was developed to defend against these attacks as it is the most common form of web based attacks. It is made to be the first layer of defense against an attack. There's two types of ways to deploy the WAF, externally and internally. If you use it externally, the WAF would be placed in front of the firewall before the Route. Users would type a link to the WAF IP and it would review the user's full HTTP request, then it would either block, filter, or allow user to access the frontend site by redirecting the user to the content on the developer's private frontend's link. In an internal WAF it is in-between the Route and the frontend. The HTTPS request is read after it accesses the route and is filtered, blocked or allowed entry to frontend after.<br> Sources: GeeksforGeeks, July 2024, https://www.geeksforgeeks.org/computer-networks/what-is-a-web-application-firewall/</h3>
 
