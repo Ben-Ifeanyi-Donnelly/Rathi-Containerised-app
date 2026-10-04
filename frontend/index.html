@@ -20,7 +20,8 @@
 
 <nav>
   <a href="/">Home</a>
-  <a href="/about.html">About</a>
+  <a href="/week5.html">week5</a>
+  <a href="/index.html">week6</a>
 </nav>
 
 
@@ -73,74 +74,12 @@ d.message; })
 
 
 
-<h1>Week 5</h1>
-
-
-<p>I found an api on avoindata.suomi.fi. I found Finna, an a website that catalogues historical data such as books. I fistly tested if the api worked by running a curl command on bash.</p> 
-
-
-<img src="https://a3s.fi/swift/v1/Containered-app/curl.png">
-
-
-
-<p><br>Reflection:<br>I firstly found an app called 'can i enter' on github, which was a site that shows visa requirements if want to enter a country from another country. I thought the api was free to use, but I needed to pay after five searches a day, so i found a different one.</p>
+<h1>Week 6</h1>
 
 
 
 
-
-
-</p>
 <h2>Weekly 4 Definitions</h2>
-
-
-
-
-
-<div class="q5">
-
-
-<h3><b>What is a Web Application Firewall (WAF), and what kinds of attacks does it defend against? Where would you place one in the three-container architecture you built in Week 4 (Route → frontend → backend → db)?</h3>
-
-<p> A Web Application Firewall is a firewall configured to deal with malicious HTTPS traffic that attack web applications. It monitors the network for incoming attacks and can alert your system from DDOS Attacks, SQL injections, zero day attacks and cross site scripting attacks. It was developed to defend against these attacks as it is the most common form of web based attacks. It is made to be the first layer of defense against an attack. There's two types of ways to deploy the WAF, externally and internally. If you use it externally, the WAF would be placed in front of the firewall before the Route. Users would type a link to the WAF IP and it would review the user's full HTTP request, then it would either block, filter, or allow user to access the frontend site by redirecting the user to the content on the developer's private frontend's link. In an internal WAF it is in-between the Route and the frontend. The HTTPS request is read after it accesses the route and is filtered, blocked or allowed entry to frontend after.<br> Sources: GeeksforGeeks, July 2024, https://www.geeksforgeeks.org/computer-networks/what-is-a-web-application-firewall/</h3>
-
-
-
-<h3><br>What is YAML and why has it become the default configuration format for Kubernetes/Rahti manifests? Compare it briefly to JSON.</h3>
-
-<p>YAML stands for 'YAML Ain't Markup Language', it was originally called 'Yet Another Markup Language' as it is used similarly to XML, but was later changed as its syntax was accepted as more unique and defined to ordering data structures, like JSON. Markup languages don't care about indentation and use XML tags which YAML does not. Although for the majority of tasks, XML and YAML can often be used interchangeably unless a service requires one specifically. JSON is similar to YAML but like XML, indentation does not matter. Both languages look similar in syntax and can often be used similarly, below is a short example of syntax.<br><br>YAML :<br> 
-	<br>  Person: 
-	<br>&nbsp;name: Ben
-	<br>&nbsp;age: 24<br>
-
-	<br>JSON :
-	<br>     &nbsp;{
-	<br>	&nbsp;"Person": {
-	<br>	&nbsp;&nbsp;"name": "Ben",
-	<br>	&nbsp;&nbsp;"age": 24,
-	<br>    &nbsp;}
-	<br>}<br>
-
-	<br>YAML became the default configuration format for Kubernetes and Rathi manifests for a few reasons. For one, developers can write comments which they can't do in JSON. Comments in code are extremely useful for shared projects with many developers sharing resources. It is also very human readable fast to edit. The indentation also makes the structure more obvious when it's instantly opened. Non indented languages can sometimes make it not obvious how the structure is laid out.<br>
-<br>Soures:
-GitLab, https://about.gitlab.com/topics/devops/what-is-yaml/<br>GeeksforGeeks, https://www.geeksforgeeks.org/html/what-is-the-difference-between-yaml-and-json/</p>
-
-
-<h2><br>Explain what a peer-to-peer VPN (for example n2n) is used for, and how it differs from a traditional site-to-site VPN.</h2>
-
-<p>Traditional site-to-site VPNs are usually used by large organisation to connect their trusted workspaces, such as an company’s main hub to their branch offices. A private tunnel is made to connect each of them to the host office and enable private communication over the internet. It is used for long term continuous communication with a select number of trusted clients. These connections are configured through routers and establishes communication a equal to a physical connection. It uses IPsec, a set of internet security protocols, to encrypt outgoing data sent across the internet. The incoming data is then decrypted by the receiver after it arrives. Peer-to-peer is designed to connect two clients and transfer data across the internet in an encrypted tunnel. made by vpns such as n2n, nordvpn, etc. These are usually used by individuals while site-to-site is usually used by large organisations to develop a strong network between routers in different LANS. Peer-to-peer is usually involve installing vpn software on a device while site-to-site is designed by configuring routers and firewalls directly.<br>Sources: 
-	<br>Ainman Ikram, june 2024, https://www.puredome.com/blog/difference-between-point-to-point-and-site-to-site-vpn<br>
-</p>
-
-
-<h3> <br>Explain the difference between SAML and OAuth. When would a company choose one over the other?</h3>
-
-
-<p>SAML stands for Security Assertion Markup Language. It's a security protocol organisations use to authenticate their users. It signs them into many applications and workspaces they need to use. It is a reduces time for sign ins and increased productivity. If an employee needs to access multiple applications for a single project reducing sign ins is a time saver. It works firstly by having an Identity Provider, on the local organisations servers or hosted on a cloud service. This identity provider sees who is logging in onto the PC and when a user opens an application, if the application supports SAML, it will ask the identity provider who the user is and the provider will send over an XML file asserting the user. The application will direct them to a browser and log them in. An OAuth is an authorization tool. It works similarly to SAML but handles the app's security/consent. A user is redirected to an organization’s authorization server and asks the user for certain consent privileges. The user selects what they consent to and this information is sent back to the company’s servers. The organization provides a token which is then given to the app. Then the app talks to the API and asks for access with the token it was given. If everything works correctly the app can then access what the user allowed, for example Samsung photos has access to files now.<br>Sources:<br> okta, August 2024, https://www.okta.com/identity-101/saml-vs-oauth/</p>
-
-
-</div>
-
 
 </body>
 </html>
