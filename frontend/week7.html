@@ -11,6 +11,10 @@
 		{
 		width: min(90%, 1000px);
 		font-size: 20px;
+        img {
+            width: 150%;
+            height: 150%;
+        }
 	}
 
 	</style>
@@ -28,8 +32,77 @@
 
     <h1>Week 7</h1>
 
+    <p>I first set up my credentialials and downloaded my secret clouds.yaml file.<br></p>
+
+    <img src="https://a3s.fi/swift/v1/week77/creating-app-cred.png">
+
+    <p><br>I then ensured my file was ignored by git as stated in the .gitignore file. Below you can see after I ran git status, the clouds.yaml file will not be tracked by git.<br></p>
+
+    <img src="https://a3s.fi/swift/v1/week77/ignored.png">
+
+    <p><br>I downloaded Tofu and initialised the versions.tf file, declaring the tools and providers I am accessing, which in this case is OpenShift. I then set up a main.tf as my base infrastructure for my application. 
+        I ran the tofu init to initialise Tofu and then tofu validate to check for errors. Below is my output from the validate command.<br></p>
+
+    <img src="https://a3s.fi/swift/v1/week77/tofu-validate.png">
+
+        <p><br>My variables.tf was used to declare the variables which were mentioned in the main.tf example I was given. Below is my finished variables.tf<br></p>
+        <img src="https://a3s.fi/swift/v1/week77/variables.png">
+
+    
+
+    <p><br>I made a terraform.tfvars.example file which mirrors my real terraform.tfvars file.
+         My terraform.tfvars are not committed to git and is not on this website for security reasons. Below is the example in which I stored my values. 
+         This provides clear steps on how I declared my variables.<br></p>
+
+    <img src="https://a3s.fi/swift/v1/week77/terraform-example.png">
+
+    <p><br>My cloud-init.yaml stores my original apache commands:   - systemctl enable --now apache2 along with my new html to show actual text to my webpage. Below is
+        a screenshot of my cloud-init.yaml file.<br></p>
+        
+        <img src="https://a3s.fi/swift/v1/week77/cloud.png">
 
 
 
+        <p><br>The outputs.tf below, has the local IP address of the floating IP, along with the url to the IP address.<br></p>
+
+  <img src="https://a3s.fi/swift/v1/week77/outputs.png">
+
+
+
+    <p><br><br>Below is a screenshot of the page ran after tofu apply.<br></p>
+
+  <img src="https://a3s.fi/swift/v1/week77/finalpage.png">
+
+
+
+
+        <p><br>Screenshot of items stored in my git repository.<br></p>
+        <img src="https://a3s.fi/swift/v1/week77/git-repo.png">
+
+
+
+
+
+        <p><br><b>Experiment 1: Changing text</b><br>I expected the Virtual Machine to update. I also expected the public IP address to change.
+            Neither of these things occured. Instead the resource was destroyed and added again. The IP address also did not change. Below is a screenshot of the resulting output.<br></p>
+
+        <img src="https://a3s.fi/swift/v1/week77/exp1.png">
+
+
+        <p><br>On further inspection I found the IP address does not change as it 
+            declared by the port in main.tf with the line: <br>network {<br>
+  port = openstack_networking_port_v2.web.id. As this is not changed, the floating IP will not change.<br></pp>
+
+
+
+
+  <p><br><b>Experiment 1.5: Adding HTTPS at port 443</b>
+    <br>I added the port 443 by copying the code already there for port 80 and replacinng it with 443. I expected this to add one additional resource. I was correct in this afterwards as you can see in the image below, one more was added.<br></p>
+
+    <img src="https://a3s.fi/swift/v1/week77/exp1.png">
+
+
+
+    <p><br><b>Experiment 2: Drift deleted rule
 
     </body>
