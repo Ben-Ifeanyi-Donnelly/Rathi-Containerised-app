@@ -40,7 +40,7 @@
 
     <img src="https://a3s.fi/swift/v1/week77/ignored.png">
 
-    <p><br>I downloaded Tofu and initialised the versions.tf file, declaring the tools and providers I am accessing, which in this case is OpenShift. I then set up a main.tf as my base infrastructure for my application. 
+    <p><br>I downloaded Tofu and initialised the versions.tf file, declaring the tools and providers I am accessing, which in this case is OpenStack. I then set up a main.tf as my base infrastructure for my application. 
         I ran the tofu init to initialise Tofu and then tofu validate to check for errors. Below is my output from the validate command.<br></p>
 
     <img src="https://a3s.fi/swift/v1/week77/tofu-validate.png">
@@ -69,7 +69,20 @@
 
 
 
-    <p><br><br>Below is a screenshot of the page ran after tofu apply.<br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p><br><br>I ran tofu init which initialised the application. tofu validate validated for errors or undeclared variables remaining. tofu plan provided me with the planned action tofu would do when running tofu apply. Its suppose to be an assumption which shouldn't be taken as a 100% guarantee. Below is a screenshot of the page after I ran tofu apply.<br></p>
 
   <img src="https://a3s.fi/swift/v1/week77/finalpage.png">
 
@@ -90,7 +103,7 @@
 
 
         <p><br>On further inspection I found the IP address does not change as it 
-            declared by the port in main.tf with the line: <br>network {<br>
+            declared by the port in main.tf with the line: <br>network<br>
   port = openstack_networking_port_v2.web.id. As this is not changed, the floating IP will not change.<br></pp>
 
 
@@ -103,6 +116,29 @@
 
 
 
-    <p><br><b>Experiment 2: Drift deleted rule
+
+    <p><br><b>Experiment 2: Drift deleted rule</b><br>I didnt think that tofu would notice that I
+        had deleted the rule.</p>
+
+
+        <img src="https://a3s.fi/swift/v1/week77/delete.png">
+
+        <p>It had noticed and planned to add it back. upon next apply<br></p>
+
+
+
+        <img src="https://a3s.fi/swift/v1/week77/tofu-drift.png">
+
+
+
+
+
+
+        <p><br><b>Experiment 2.5: Drift added rule</b><br>I expected tofu to notice I added a rule since it had noticed I had deleted one. 
+            Tofu did not notice and made no plans to change it on tofu plan. It still only noticed the one removed and made plans to add it back. 
+            This is becasue if a resource is created in local files using tofu, tofu will keep track of each rule I may add in main.yt. 
+            It doesn't have the records on cPouta security groups so it has no way of knowing what was added on that level.</p>
+
+
 
     </body>
